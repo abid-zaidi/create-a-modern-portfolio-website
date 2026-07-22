@@ -1,0 +1,1932 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior:smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soren Vance — Staff Product Designer for Tech Startups</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #6366f1;
+      --primary-hover: #4f46e5;
+      --accent: #818cf8;
+      --emerald: #10b981;
+      --bg: #0b0f17;
+      --bg-surface: #131b2e;
+      --bg-card: #1e293b;
+      --bg-card-hover: #26334d;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-focus: rgba(99, 102, 241, 0.5);
+      --ink: #f8fafc;
+      --ink-muted: #94a3b8;
+      --radius-sm: 0.5rem;
+      --radius: 0.875rem;
+      --radius-lg: 1.5rem;
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.25);
+      --shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+      --shadow-glow: 0 0 30px rgba(99, 102, 241, 0.25);
+      --gradient-accent: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+      --gradient-surface: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0) 100%);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--ink-muted);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      color: var(--ink);
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    [data-page] {
+      animation: pageIn 0.35s ease-out;
+    }
+
+    @keyframes pageIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* HEADER / NAVBAR */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(11, 15, 23, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0;
+    }
+
+    .nav-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+    }
+
+    .brand-logo span.spark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      background: var(--gradient-accent);
+      border-radius: 8px;
+      color: #fff;
+      font-size: 0.9rem;
+      box-shadow: 0 0 12px rgba(99, 102, 241, 0.4);
+    }
+
+    nav.nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    nav.nav-links a {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--ink-muted);
+      position: relative;
+      padding: 0.25rem 0;
+    }
+
+    nav.nav-links a:hover {
+      color: var(--ink);
+    }
+
+    nav.nav-links a.active {
+      color: var(--ink);
+    }
+
+    nav.nav-links a.active::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .auth-link {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--ink-muted);
+    }
+
+    .auth-link:hover {
+      color: var(--ink);
+    }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--gradient-accent);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5);
+      color: #fff;
+    }
+
+    .btn-secondary {
+      background: var(--bg-card);
+      color: var(--ink);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-card-hover);
+      border-color: rgba(255, 255, 255, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--border);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--primary);
+      background: rgba(99, 102, 241, 0.05);
+    }
+
+    /* BADGES & EYEBROWS */
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.85rem;
+      background: rgba(99, 102, 241, 0.12);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      border-radius: 999px;
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .eyebrow .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--emerald);
+      box-shadow: 0 0 8px var(--emerald);
+    }
+
+    /* SECTIONS COMMON */
+    section {
+      padding: clamp(3.5rem, 7vw, 6rem) 0;
+      position: relative;
+    }
+
+    .section-header {
+      max-width: 680px;
+      margin-bottom: 3rem;
+    }
+
+    .section-header.center {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .section-header h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+
+    .section-header p {
+      font-size: 1.125rem;
+      color: var(--ink-muted);
+    }
+
+    /* HERO SECTION */
+    .hero {
+      padding-top: clamp(3rem, 6vw, 5rem);
+      padding-bottom: clamp(4rem, 8vw, 6rem);
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      font-size: clamp(2.5rem, 5.5vw, 4rem);
+      letter-spacing: -0.03em;
+      margin-bottom: 1.25rem;
+      color: var(--ink);
+    }
+
+    .hero-text h1 .gradient-text {
+      background: var(--gradient-accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-text p.lead {
+      font-size: 1.2rem;
+      color: var(--ink-muted);
+      margin-bottom: 2rem;
+      max-width: 540px;
+      line-height: 1.6;
+    }
+
+    .ctas {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-trust-line {
+      margin-top: 2.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .hero-trust-line span {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--ink-muted);
+      font-weight: 600;
+    }
+
+    .hero-trust-logos {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      opacity: 0.7;
+    }
+
+    .hero-trust-logos span {
+      font-weight: 700;
+      color: var(--ink);
+      font-size: 1rem;
+    }
+
+    /* HERO VISUAL MOCK */
+    .hero-visual {
+      position: relative;
+    }
+
+    .hero-mock-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow), var(--shadow-glow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-mock-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .mock-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .mock-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .mock-dot.red { background: #ff5f56; }
+    .mock-dot.yellow { background: #ffbd2e; }
+    .mock-dot.green { background: #27c93f; }
+
+    .hero-mock-body {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .mock-chart-container {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      border: 1px solid var(--border);
+    }
+
+    .mock-chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .mock-stat {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .mock-bar-graph {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      height: 100px;
+      padding-top: 1rem;
+    }
+
+    .bar {
+      flex: 1;
+      background: rgba(99, 102, 241, 0.2);
+      border-radius: 4px 4px 0 0;
+      transition: height 0.3s ease;
+    }
+
+    .bar.highlight {
+      background: var(--gradient-accent);
+      box-shadow: 0 0 12px rgba(99, 102, 241, 0.5);
+    }
+
+    .floating-badge {
+      position: absolute;
+      bottom: -15px;
+      right: -15px;
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: var(--radius);
+      padding: 0.85rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      box-shadow: var(--shadow);
+    }
+
+    .floating-badge .icon-box {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--emerald);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    /* STATS / TRUST BAR */
+    .stats-bar {
+      border-y: 1px solid var(--border);
+      background: rgba(19, 27, 46, 0.5);
+      padding: 2.5rem 0;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      text-align: center;
+    }
+
+    .stat-card .number {
+      font-size: 2.75rem;
+      font-weight: 800;
+      color: var(--ink);
+      letter-spacing: -0.03em;
+      margin-bottom: 0.25rem;
+      background: linear-gradient(180deg, #ffffff 0%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .stat-card .label {
+      font-size: 0.9rem;
+      color: var(--ink-muted);
+      font-weight: 500;
+    }
+
+    /* FEATURE / SERVICE CARDS GRID */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(99, 102, 241, 0.4);
+      box-shadow: var(--shadow);
+    }
+
+    .icon-badge {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-sm);
+      background: rgba(99, 102, 241, 0.12);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .card h3 {
+      font-size: 1.35rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .card p {
+      color: var(--ink-muted);
+      font-size: 0.98rem;
+      line-height: 1.6;
+    }
+
+    /* PORTFOLIO WORK GRID */
+    .work-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .work-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(99, 102, 241, 0.5);
+      box-shadow: var(--shadow);
+    }
+
+    .work-image-wrapper {
+      width: 100%;
+      height: 240px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .work-image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .work-card:hover .work-image-wrapper img {
+      transform: scale(1.05);
+    }
+
+    .work-content {
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .work-tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.85rem;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.25rem 0.65rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 999px;
+      color: var(--accent);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .work-content h3 {
+      font-size: 1.35rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .work-content p {
+      font-size: 0.95rem;
+      color: var(--ink-muted);
+      margin-bottom: 1.25rem;
+    }
+
+    .work-meta {
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--emerald);
+    }
+
+    /* TESTIMONIALS */
+    .testimonial-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .testimonial-quote {
+      font-size: 1.05rem;
+      color: var(--ink);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .avatar-img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--primary);
+    }
+
+    .author-info h4 {
+      font-size: 1rem;
+      color: var(--ink);
+    }
+
+    .author-info p {
+      font-size: 0.85rem;
+      color: var(--ink-muted);
+    }
+
+    /* PROCESS / STEPS */
+    .step-card {
+      position: relative;
+      padding-left: 3.5rem;
+    }
+
+    .step-number {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 2.5rem;
+      height: 2.5rem;
+      background: var(--bg-card);
+      border: 1px solid var(--primary);
+      color: var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+    }
+
+    /* CTA BAND */
+    .cta-band {
+      background: linear-gradient(135deg, #1e1b4b 0%, #31104b 100%);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      border-radius: var(--radius-lg);
+      padding: clamp(3rem, 6vw, 4.5rem) 2rem;
+      text-align: center;
+      margin: 4rem auto;
+      max-width: 1200px;
+      box-shadow: var(--shadow-glow);
+    }
+
+    .cta-band h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 1rem;
+      color: #fff;
+    }
+
+    .cta-band p {
+      font-size: 1.15rem;
+      color: #cbd5e1;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+
+    .cta-band .btn-light {
+      background: #ffffff;
+      color: #0f172a;
+      font-weight: 700;
+    }
+
+    .cta-band .btn-light:hover {
+      background: #f1f5f9;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(255, 255, 255, 0.25);
+    }
+
+    /* AUTH PAGES */
+    .auth-container {
+      min-height: calc(100vh - 200px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1rem;
+    }
+
+    .auth-card {
+      width: 100%;
+      max-width: 440px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      box-shadow: var(--shadow);
+    }
+
+    .auth-card h1 {
+      font-size: 1.75rem;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+
+    .auth-card p.auth-sub {
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--ink-muted);
+      margin-bottom: 2rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--ink);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+    }
+
+    textarea.form-control {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .auth-footer {
+      margin-top: 1.5rem;
+      text-align: center;
+      font-size: 0.875rem;
+    }
+
+    .auth-footer a {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* PRICING / ENGAGEMENT CARDS */
+    .pricing-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .pricing-card.featured {
+      border-color: var(--primary);
+      background: linear-gradient(180deg, rgba(99, 102, 241, 0.08) 0%, var(--bg-surface) 100%);
+    }
+
+    .badge-pop {
+      position: absolute;
+      top: -12px;
+      right: 24px;
+      background: var(--gradient-accent);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      text-transform: uppercase;
+    }
+
+    .price-amount {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--ink);
+      margin: 1rem 0 0.5rem;
+    }
+
+    .price-period {
+      font-size: 0.9rem;
+      color: var(--ink-muted);
+    }
+
+    .feature-list {
+      list-style: none;
+      margin: 1.75rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .feature-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.95rem;
+    }
+
+    .feature-list li::before {
+      content: "✓";
+      color: var(--emerald);
+      font-weight: 800;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #070a10;
+      border-top: 1px solid var(--border);
+      padding: 4rem 0 2rem;
+    }
+
+    .foot-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 2.5rem;
+      align-items: start;
+      margin-bottom: 3rem;
+    }
+
+    .foot-col-brand {
+      grid-column: span 1;
+    }
+
+    .foot-col-brand p {
+      font-size: 0.9rem;
+      color: var(--ink-muted);
+      margin-top: 1rem;
+      max-width: 260px;
+    }
+
+    .foot-col h4 {
+      font-size: 0.95rem;
+      color: var(--ink);
+      margin-bottom: 1.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .foot-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .foot-col ul a {
+      font-size: 0.9rem;
+      color: var(--ink-muted);
+    }
+
+    .foot-col ul a:hover {
+      color: var(--ink);
+    }
+
+    .foot-bottom {
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: var(--ink-muted);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    /* RESPONSIVE BREAKPOINTS */
+    @media (max-width: 768px) {
+      .container { padding: 0 1.25rem; }
+      .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hero-text h1 { font-size: clamp(2rem, 7vw, 3rem); }
+      nav.nav-links { gap: 1rem; }
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      header .nav-wrapper { flex-wrap: wrap; }
+      nav.nav-links { width: 100%; justify-content: space-between; font-size: 0.85rem; overflow-x: auto; padding: 0.5rem 0; }
+      .nav-actions { width: 100%; justify-content: flex-end; }
+      .ctas { flex-direction: column; width: 100%; }
+      .ctas .btn { width: 100%; }
+      .grid-3, .grid-2 { grid-template-columns: 1fr !important; }
+      footer .foot-grid { grid-template-columns: 1fr; text-align: left; }
+      .auth-card { padding: 1.5rem; }
+    }
+  </style>
+<style id="__mintsite_fix__">
+/* ── mintsite auto-fix: prevent overlapping + force responsiveness ── */
+*, *::before, *::after { box-sizing:border-box; }
+html, body { max-width:100% !important; overflow-x:hidden !important; margin:0 !important; padding-left:0 !important; padding-right:0 !important; }
+body { position:relative; }
+h1, h2, h3, h4, p, a, span, button, label { overflow-wrap:break-word !important; word-break:break-word; max-width:100%; }
+img, svg, video, iframe { max-width:100% !important; height:auto; display:block; }
+
+/* ── Defensive default-styles override — kicks in when the AI (especially
+   Groq's llama-3.3-70b) skips styling links and buttons. Keeps every site
+   looking polished even when the AI's CSS is thin. ── */
+
+/* Links: no default blue/underline anywhere. The AI almost never overrides
+   this for footer/secondary links, so it leaks browser defaults. */
+a { color:inherit !important; text-decoration:none !important; }
+a:hover { text-decoration:none; }
+
+/* Footer column links: ensure they're light-on-dark, no underline, soft hover. */
+footer a, [class*="footer"] a { color:rgba(255,255,255,.78) !important; transition:color .15s; }
+footer a:hover, [class*="footer"] a:hover { color:#fff !important; }
+
+/* Footer headings (column titles like "Browse" "Account" "Follow"): uppercase
+   eyebrow style so they don't look like raw h4s. */
+footer h3, footer h4, footer h5, [class*="footer"] h3, [class*="footer"] h4 {
+  font-size:.78rem !important; letter-spacing:.08em !important; text-transform:uppercase !important;
+  color:rgba(255,255,255,.55) !important; font-weight:600 !important; margin-bottom:1rem !important;
+}
+/* Footer list items: no bullet, tight spacing. */
+footer ul, [class*="footer"] ul { list-style:none !important; padding-left:0 !important; margin:0 !important; }
+footer ul li, [class*="footer"] ul li { padding:.3rem 0 !important; }
+
+/* Buttons: never the chrome-default look. Round + cursor + smooth transition.
+   Specific .add-to-cart styling lives below this. */
+button:not(.cart-icon):not(.__ms-hamburger):not(.__ms-x):not(.__ms-cart-checkout) {
+  cursor:pointer; border-radius:.5rem; font-family:inherit; transition:transform .15s, box-shadow .15s, background .15s;
+}
+
+/* .add-to-cart — primary CTA on product cards. AI usually forgets the
+   gradient + padding even when we ask for it. Force a baseline. */
+.add-to-cart, [data-add-to-cart] {
+  display:inline-flex !important; align-items:center !important; gap:.4rem !important;
+  padding:.6rem 1.1rem !important;
+  border-radius:.55rem !important;
+  background:linear-gradient(135deg, var(--primary, #1d4ed8), color-mix(in srgb, var(--primary, #1d4ed8) 72%, #000)) !important;
+  color:#fff !important; font-weight:600 !important; font-size:.88rem !important;
+  border:0 !important; cursor:pointer !important;
+  box-shadow:0 6px 18px -6px rgba(0,0,0,.25) !important;
+  transition:transform .15s, box-shadow .15s, filter .15s !important;
+}
+.add-to-cart:hover, [data-add-to-cart]:hover {
+  transform:translateY(-1px) !important; filter:brightness(1.08) !important;
+  box-shadow:0 10px 26px -6px rgba(0,0,0,.35) !important;
+}
+
+/* Product price tag — bold, accent color (not raw body text). */
+.price, .product-card .price, [class*="price-row"] .price {
+  font-size:1.1rem !important; font-weight:700 !important;
+  color:var(--primary, #1d4ed8) !important;
+}
+
+/* ── Form fields — the AI very often leaves inputs/textareas browser-default
+   (no border radius, labels inline). Give every form a clean baseline so
+   contact / sign-in / sign-up forms always look intentional. ── */
+form input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
+form textarea, form select {
+  display:block !important; width:100% !important; box-sizing:border-box !important;
+  padding:.7rem .9rem !important; margin-top:.35rem !important;
+  border:1px solid rgba(15,23,42,.16) !important; border-radius:.6rem !important;
+  background:#fff !important; color:#0f172a !important;
+  font-size:.95rem !important; font-family:inherit !important; line-height:1.4 !important;
+  transition:border-color .15s, box-shadow .15s !important;
+}
+form input::placeholder, form textarea::placeholder { color:#94a3b8 !important; }
+form input:focus, form textarea:focus, form select:focus {
+  outline:none !important; border-color:var(--primary,#6366f1) !important;
+  box-shadow:0 0 0 3px rgba(99,102,241,.18) !important;
+}
+form textarea { min-height:120px !important; resize:vertical !important; }
+form label {
+  display:block !important; margin-top:.9rem !important; margin-bottom:.1rem !important;
+  font-size:.85rem !important; font-weight:600 !important; color:#334155 !important;
+}
+/* Submit buttons inside forms get the primary look if the AI under-styled them. */
+form button[type="submit"], form .btn-primary {
+  display:inline-flex !important; align-items:center !important; justify-content:center !important;
+  gap:.4rem !important; margin-top:1.1rem !important;
+  padding:.75rem 1.4rem !important; border:0 !important; border-radius:.6rem !important;
+  background:linear-gradient(135deg, var(--primary,#1d4ed8), color-mix(in srgb, var(--primary,#1d4ed8) 72%, #000)) !important;
+  color:#fff !important; font-weight:600 !important; font-size:.95rem !important; cursor:pointer !important;
+}
+
+/* Generic primary/ghost buttons + nav links the AI may have under-styled. */
+.btn-primary, [class*="btn-primary"] {
+  background:linear-gradient(135deg, var(--primary, #1d4ed8), color-mix(in srgb, var(--primary, #1d4ed8) 72%, #000)) !important;
+  color:#fff !important; padding:.7rem 1.4rem !important;
+  border-radius:.6rem !important; border:0 !important; font-weight:600 !important;
+}
+
+/* Lists rendered by the AI in the body should not be bullet-defaulted blue. */
+main ul:not([role]):not([class]), main ol:not([role]):not([class]) {
+  list-style:none !important; padding-left:0 !important;
+}
+.blob, [class*="blob"], [class*="gradient-orb"], [class*="bg-blur"] {
+  position:fixed !important; z-index:0 !important; opacity:.15 !important;
+  pointer-events:none !important; max-width:500px !important; max-height:500px !important;
+}
+section, main, .hero, [id="home"], [id="features"], [id="pricing"],
+[id="testimonials"], [id="faq"], [id="contact"], [id="about"],
+[id="cta"], [id="how-it-works"], article, .container {
+  position:relative; z-index:1; max-width:100%;
+}
+header, nav.nav, .navbar, [class*="header"], [class*="navbar"] {
+  position:sticky !important; top:0 !important; z-index:50 !important;
+  background:rgba(255,255,255,.92) !important; backdrop-filter:blur(12px) !important;
+  -webkit-backdrop-filter:blur(12px) !important;
+}
+.hero-card, [class*="hero-card"], [class*="hero-image"], [class*="hero-visual"] {
+  max-width:100% !important; overflow:hidden;
+}
+[class*="grid"] { max-width:100%; }
+
+/* ── Bulletproof card grids: never collapse so narrow that text wraps one
+   letter per line. auto-fit + minmax keeps each card >=240px and wraps to
+   fewer columns instead of squishing. Overrides brittle repeat(3,1fr). ── */
+.product-grid, [class*="product-grid"], .grid-2, .grid-3, .grid-4,
+[class*="grid-2"], [class*="grid-3"], [class*="grid-4"] {
+  display:grid !important;
+  grid-template-columns:repeat(auto-fit, minmax(min(100%, 240px), 1fr)) !important;
+  gap:1.5rem !important; align-items:stretch !important;
+}
+/* If a grid lands on a SECTION's container by mistake, force heading, intro AND
+   the card grid to span the full row so cards lay out properly. Scoped to
+   sections only — footers use .container too and must keep their columns. */
+section > h1, section > h2, section > h3, section > p, section > .product-grid,
+section .container > h1, section .container > h2, section .container > h3,
+section .container > p, section .container > .product-grid {
+  grid-column:1 / -1 !important;
+}
+/* Price + Add to Cart never break to one-letter-per-line. */
+.price, .add-to-cart, [data-add-to-cart] { white-space:nowrap !important; }
+
+/* Keep section padding sane — huge AI padding (6-8rem) leaves big empty gaps
+   between components. Hero keeps its own padding. */
+section:not(.hero):not([class*="hero"]):not([id="home"]):not([id="hero"]) {
+  padding-top:clamp(2.5rem, 5vw, 4rem) !important;
+  padding-bottom:clamp(2.5rem, 5vw, 4rem) !important;
+}
+
+/* Non-home page headers reuse .hero (a 2-column flex) → their heading/text
+   children squish into a narrow column. Let them wrap + span full row. */
+.hero > .container, .hero-content, .hero .container { flex-wrap:wrap; }
+.hero > .container > h1, .hero > .container > h2, .hero > .container > h3,
+.hero > .container > p, .hero > .container > span, .hero > .container > .eyebrow,
+.hero > .container > .btn, .hero > .container > .ctas, .hero > .container > a {
+  flex-basis:100% !important; max-width:100% !important;
+}
+/* CTA-band button stays readable (white pill + brand-colour text). */
+.cta-band .btn, .cta-band a.btn, .cta-band button,
+.cta-section .btn, .cta-section a.btn {
+  background:#fff !important; color:var(--primary, #1d4ed8) !important; border-color:#fff !important;
+}
+
+/* Auth cards: tighter margin, sensible heading size (the AI's big clamp wraps
+   "Create Your account" one word per line), and no tall forced min-height. */
+.auth-card, [class*="auth-card"] { margin:1.5rem auto !important; }
+.auth-card h1, .auth-card h2, [class*="auth-card"] h1, [class*="auth-card"] h2 {
+  font-size:clamp(1.4rem, 3.5vw, 2rem) !important; line-height:1.2 !important;
+}
+[id="signin"], [id="signup"], [id="login"],
+[data-page="signin"], [data-page="signup"] { min-height:auto !important; }
+footer, [class*="footer"] { position:relative !important; z-index:1; max-width:100%; }
+
+/* ── TABLET (≤768px): grids→1col, hero stacks, slightly smaller type ── */
+@media(max-width:768px) {
+  .container, [class*="container"] { padding-left:1rem !important; padding-right:1rem !important; }
+  .hero, [class*="hero-grid"], [id="home"] > div, [id="home"] > .container > div {
+    display:flex !important; flex-direction:column !important; gap:1.5rem !important;
+  }
+  .hero-card, [class*="hero-card"], [class*="hero-image"], [class*="hero-visual"] {
+    max-width:100% !important; margin:0 auto !important; width:100% !important;
+  }
+  [class*="grid-3"], [class*="grid-4"], .grid-3, .grid-4, .grid-2, [class*="grid-2"] {
+    grid-template-columns:1fr 1fr !important; gap:1rem !important;
+  }
+  h1 { font-size:clamp(1.6rem,5vw,2.4rem) !important; line-height:1.15 !important; }
+  h2 { font-size:clamp(1.3rem,4vw,1.9rem) !important; line-height:1.2 !important; }
+  h3 { font-size:1rem !important; }
+  p, .lead { font-size:.95rem !important; }
+  section { padding-top:2.5rem !important; padding-bottom:2.5rem !important; }
+  .auth-card, [class*="auth-card"] { max-width:100% !important; margin:2rem 1rem !important; padding:1.5rem !important; }
+}
+
+/* ── PHONE (≤480px): everything stacks single column, type shrinks more ── */
+@media(max-width:480px) {
+  .container, [class*="container"] { padding-left:.85rem !important; padding-right:.85rem !important; }
+  /* Header: stack logo + nav vertically, smaller logo, hamburger pattern */
+  header > div, header > nav, .nav > .inner, [class*="header"] > div {
+    flex-wrap:wrap !important; gap:.5rem !important; padding-top:.5rem !important; padding-bottom:.5rem !important;
+    height:auto !important; min-height:56px !important;
+  }
+  header nav, header .links, [class*="header"] nav, [class*="nav-links"] {
+    display:flex !important; flex-wrap:wrap !important; gap:.25rem !important; width:100%; justify-content:center;
+  }
+  header nav a, header .links a, [class*="nav-links"] a {
+    padding:.35rem .65rem !important; font-size:.82rem !important;
+  }
+  header .auth, [class*="auth-buttons"], [class*="header-auth"] {
+    margin-left:0 !important; gap:.3rem !important;
+  }
+  header .auth a, [class*="auth-buttons"] a {
+    padding:.4rem .75rem !important; font-size:.8rem !important;
+  }
+  .logo { font-size:.95rem !important; }
+  .cart-icon { padding:6px !important; font-size:18px !important; }
+  /* Hero: stack and shrink */
+  .hero, [class*="hero-grid"] { gap:1rem !important; padding-top:1.5rem !important; }
+  h1 { font-size:clamp(1.4rem,7vw,1.9rem) !important; }
+  h2 { font-size:clamp(1.15rem,5vw,1.5rem) !important; }
+  /* All grids collapse to single column */
+  [class*="grid-3"], [class*="grid-4"], .grid-3, .grid-4, .grid-2, [class*="grid-2"],
+  .product-grid, [class*="product-grid"] {
+    grid-template-columns:1fr !important; gap:1rem !important;
+  }
+  /* Buttons: full-width-ish, touch-friendly */
+  .btn-primary, .btn-ghost, button[type="submit"], .ctas a, .ctas button {
+    width:auto !important; min-height:44px !important; padding:.75rem 1.25rem !important; font-size:.9rem !important;
+  }
+  .ctas { flex-direction:column !important; gap:.6rem !important; width:100%; }
+  .ctas > * { width:100% !important; text-align:center; }
+  /* Product/feature cards tighter */
+  .product-card, .card, article {
+    padding:1rem !important;
+  }
+  .product-card img, .card img { aspect-ratio:1/1 !important; }
+  /* Footer: stack columns */
+  footer, [class*="footer"] {
+    text-align:center; padding-top:2rem !important; padding-bottom:1.5rem !important;
+  }
+  footer .foot-grid, footer [class*="foot-grid"], footer .columns {
+    grid-template-columns:1fr !important; gap:1.5rem !important;
+  }
+  footer .brand-block, footer [class*="brand-block"] {
+    margin:0 auto; max-width:280px;
+  }
+  /* Section padding shrinks more on phones */
+  section { padding-top:2rem !important; padding-bottom:2rem !important; }
+  /* Tables (if any) become scrollable */
+  table { display:block; overflow-x:auto; white-space:nowrap; }
+}
+
+/* ── Hard safety net: any element that's wider than viewport gets wrapped ── */
+@media(max-width:768px) {
+  body > * { max-width:100vw !important; }
+  pre, code { white-space:pre-wrap !important; word-break:break-word !important; }
+}
+</style>
+</head>
+<body>
+
+  <!-- HEADER / NAVBAR -->
+  <header>
+    <div class="container nav-wrapper">
+      <a href="#home" class="brand-logo">
+        <span class="spark">✦</span>
+        <span>Soren Vance</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#home" class="active">Home</a>
+        <a href="#work">Work</a>
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="#signin" class="auth-link">Client Portal</a>
+        <a href="#contact" class="btn btn-primary">Book Discovery Call</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- PAGE 1: HOME -->
+  <main data-page="home" class="page-route">
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-text">
+          <div class="eyebrow">
+            <span class="dot"></span> Available for Q3/Q4 Founder Projects
+          </div>
+          <h1>Architecting digital products for <span class="gradient-text">high-growth tech startups</span></h1>
+          <p class="lead">Staff-level product designer specializing in high-converting SaaS interfaces, complex design systems, and rapid zero-to-one mobile apps that scale.</p>
+          <div class="ctas">
+            <a href="#work" class="btn btn-primary">View Case Studies ➔</a>
+            <a href="#services" class="btn btn-secondary">Explore Services</a>
+          </div>
+          <div class="hero-trust-line">
+            <span>Trusted By Founders At:</span>
+            <div class="hero-trust-logos">
+              <span>NEXUS</span>
+              <span>SYNAPSE</span>
+              <span>LUMEN.AI</span>
+              <span>HYPERION</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-mock-card">
+            <div class="hero-mock-header">
+              <div class="mock-dots">
+                <span class="mock-dot red"></span>
+                <span class="mock-dot yellow"></span>
+                <span class="mock-dot green"></span>
+              </div>
+              <span style="font-size: 0.75rem; color: var(--ink-muted); font-family: monospace;">app.sorenvance.design/dashboard</span>
+            </div>
+            <div class="hero-mock-body">
+              <div class="mock-chart-container">
+                <div class="mock-chart-header">
+                  <div>
+                    <div style="font-size: 0.75rem; color: var(--ink-muted);">MRR GROWTH OVERHAUL</div>
+                    <div class="mock-stat">$142,800 <span style="font-size: 0.8rem; color: var(--emerald);">+42.8%</span></div>
+                  </div>
+                  <span class="tag">Series-A Optimized</span>
+                </div>
+                <div class="mock-bar-graph">
+                  <div class="bar" style="height: 35%;"></div>
+                  <div class="bar" style="height: 45%;"></div>
+                  <div class="bar" style="height: 40%;"></div>
+                  <div class="bar" style="height: 60%;"></div>
+                  <div class="bar" style="height: 75%;"></div>
+                  <div class="bar highlight" style="height: 95%;"></div>
+                </div>
+              </div>
+            </div>
+            <div class="floating-badge">
+              <div class="icon-box">⚡</div>
+              <div>
+                <div style="font-size: 0.8rem; font-weight: 700; color: var(--ink);">Fast Delivery</div>
+                <div style="font-size: 0.75rem; color: var(--ink-muted);">MVP in 3-4 Weeks</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRUST / METRICS STATS BAND -->
+    <section class="stats-bar">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="number">$180M+</div>
+            <div class="label">Startup Capital Raised by Clients</div>
+          </div>
+          <div class="stat-card">
+            <div class="number">42+</div>
+            <div class="label">Zero-to-One Products Launched</div>
+          </div>
+          <div class="stat-card">
+            <div class="number">3.8x</div>
+            <div class="label">Average Conversion Lift</div>
+          </div>
+          <div class="stat-card">
+            <div class="number">100%</div>
+            <div class="label">On-Time Sprint Velocity</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SELECTED WORK PREVIEW -->
+    <section>
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow">Selected Portfolio</div>
+          <h2>Case studies that drove measurable venture outcomes</h2>
+          <p>Every pixel engineered with business purpose, user research, and extreme craft precision.</p>
+        </div>
+
+        <div class="grid-3">
+          <article class="work-card">
+            <div class="work-image-wrapper">
+              <img src="https://images.unsplash.com/photo-1760553120468-efaad2235433?ixid=M3wxMDA0NDk4fDB8MXxzZWFyY2h8MXx8dGVjaCUyMGRhc2hib2FyZCUyMGRhcmt8ZW58MXx8fHwxNzg0NzUyMTk2fDA&ixlib=rb-4.1.0&w=800&h=600&fit=crop&q=80" alt="Pulse AI Analytics Dashboard" onerror="this.onerror=null;this.src='https://picsum.photos/seed/pulse/600/600'">
+            </div>
+            <div class="work-content">
+              <div class="work-tags">
+                <span class="tag">AI SaaS</span>
+                <span class="tag">Design System</span>
+              </div>
+              <h3>Pulse AI — Data Intelligence Suite</h3>
+              <p>Redesigned the core analytical workspace for enterprise telemetry teams, reducing user task completion time by 54%.</p>
+              <div class="work-meta">
+                <span>Outcome: $12M Series A Raised</span>
+                <span>➔</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="work-card">
+            <div class="work-image-wrapper">
+              <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixid=M3wxMDA0NDk4fDB8MXxzZWFyY2h8MXx8bW9iaWxlJTIwYXBwJTIwaW50ZXJmYWNlfGVufDF8fHx8MTc4NDc1MjE5N3ww&ixlib=rb-4.1.0&w=800&h=600&fit=crop&q=80" alt="Aether Crypto Mobile Wallet" onerror="this.onerror=null;this.src='https://picsum.photos/seed/aether/600/600'">
+            </div>
+            <div class="work-content">
+              <div class="work-tags">
+                <span class="tag">FinTech</span>
+                <span class="tag">Mobile iOS/Android</span>
+              </div>
+              <h3>Aether Pay — Next-Gen Crossborder Wallet</h3>
+              <p>Crafted a simplified non-custodial onboarding flow that boosted day-30 user retention from 18% to 41%.</p>
+              <div class="work-meta">
+                <span>Outcome: +180k Active Users</span>
+                <span>➔</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="work-card">
+            <div class="work-image-wrapper">
+              <img src="https://images.unsplash.com/photo-1489875347897-49f64b51c1f8?ixid=M3wxMDA0NDk4fDB8MXxzZWFyY2h8MXx8Y29kZSUyMGRldmVsb3BlciUyMGRhcmt8ZW58MXx8fHwxNzg0NzUyMTk3fDA&ixlib=rb-4.1.0&w=800&h=600&fit=crop&q=80" alt="Vapor Developer Platform" onerror="this.onerror=null;this.src='https://picsum.photos/seed/vapor/600/600'">
+            </div>
+            <div class="work-content">
+              <div class="work-tags">
+                <span class="tag">DevTools</span>
+                <span class="tag">UX Architecture</span>
+              </div>
+              <h3>Vapor Cloud — Serverless Console</h3>
+              <p>Built a developer-first dark mode dashboard UI and multi-tenant permission system for cloud infrastructure teams.</p>
+              <div class="work-meta">
+                <span>Outcome: Acquired by CloudCo</span>
+                <span>➔</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem;">
+          <a href="#work" class="btn btn-secondary">Explore All 6 Case Studies ➔</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CORE SERVICES HIGHLIGHT -->
+    <section style="background: rgba(19, 27, 46, 0.4);">
+      <div class="container">
+        <div class="section-header center">
+          <div class="eyebrow">Core Expertise</div>
+          <h2>How I help tech startups win</h2>
+          <p>From initial seed prototype to scalable multi-platform design systems.</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <div class="icon-badge">🚀</div>
+            <h3>Zero-to-One Product Design</h3>
+            <p>Transforming complex technical concepts into slick, intuitive product experiences that founders can demo to investors with total confidence.</p>
+          </div>
+
+          <div class="card">
+            <div class="icon-badge">❖</div>
+            <h3>Figma Design Systems</h3>
+            <p>Production-ready component libraries, tokens, and auto-layout documentation that accelerate engineering velocity by 3x.</p>
+          </div>
+
+          <div class="card">
+            <div class="icon-badge">📈</div>
+            <h3>Growth & Conversion UX</h3>
+            <p>Optimizing landing pages, checkout funnels, and user onboarding flows backed by quantitative analytics and heatmaps.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOUNDER TESTIMONIALS -->
+    <section>
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow">Client Endorsements</div>
+          <h2>What tech founders say</h2>
+          <p>Straight feedback from CEOs and VPs of Product I've collaborated with.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="testimonial-card">
+            <p class="testimonial-quote">"Soren isn't just a designer; he's a product strategist. He understood our complex AI workflows faster than our engineering team and turned it into an interface that blew our seed investors away."</p>
+            <div class="testimonial-author">
+              <img src="https://images.unsplash.com/photo-1716703741458-417a8d58f20e?ixid=M3wxMDA0NDk4fDB8MXxzZWFyY2h8MXx8cGVyc29uJTIwdGVjaCUyMGZvdW5kZXJ8ZW58MXx8fHwxNzg0NzUyMTk4fDA&ixlib=rb-4.1.0&w=800&h=600&fit=crop&q=80" alt="Elena Rostova" class="avatar-img" onerror="this.onerror=null;this.src='https://picsum.photos/seed/elena/200/200'">
+              <div class="author-info">
+                <h4>Elena Rostova</h4>
+                <p>Co-Founder & CEO at Pulse AI</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <p class="testimonial-quote">"Working with Soren felt like hiring a senior design director on day one. His Figma systems saved our developers hundreds of hours of back-and-forth iteration. Absolute top tier."</p>
+            <div class="testimonial-author">
+              <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixid=M3wxMDA0NDk4fDB8MXxzZWFyY2h8MXx8bWFuJTIwZXhlY3V0aXZlfGVufDF8fHx8MTc4NDc1MjE5OHww&ixlib=rb-4.1.0&w=800&h=600&fit=crop&q=80" alt="Marcus Chen" class="avatar-img" onerror="this.onerror=null;this.src='https://picsum.photos/seed/marcus/200/200'">
+              <div class="author-info">
+                <h4>Marcus Chen</h4>
+                <p>VP Product at Aether Pay</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA BAND -->
+    <div class="container">
+      <div class="cta-band">
+        <h2>Ready to build a product users love?</h2>
+        <p>I am currently accepting select startup design engagements for Q3/Q4. Let's schedule a 30-minute introductory call.</p>
+        <a href="#contact" class="btn btn-light">Schedule Discovery Call ➔</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- PAGE 2: WORK / PORTFOLIO -->
+  <main data-page="work" class="page-route" hidden>
+    <section>
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow">Complete Portfolio</div>
+          <h2>Case studies & product work</h2>
+          <p>Deep-dive into zero-to-one product builds, design systems, and conversion overhauls.</p>
+        </div>
+
+        <div class="grid-3">
+          <article class="work-card">
+            <div class="work-image-wrapper">
+              <img src="https://images.unsplash.com/photo-1760553120468-efaad2235433?ixid=M3wxMDA0NDk4fDB8MXxzZWFyY2h8MXx8dGVjaCUyMGRhc2hib2FyZCUyMGRhcmt8ZW58MXx8fHwxNzg0NzUyMTk2fDA&ixlib=rb-4.1.0&w=800&h=600&fit=crop&q=80" alt="Pulse AI" onerror="this.onerror=null;this.src='https://picsum.photos/seed/pulse/600/600'">
+            </div>
+            <div class="work-content">
+              <div class="work-tags">
+                <span class="tag">AI Analytics</span>
+                <span class="tag">B2B SaaS</span>
+              </div>
+              <h3>Pulse AI — Data Workspace</h3>
+              <p>End-to-end design from wireframes to high-fidelity design system. Decreased churn by 32% in 90 days.</p>
+              <div class="work-meta">
+                <span>View Full Case Study</span>
+                <span>➔</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="work-card">
+            <div class="work-image-wrapper">
+              <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixid=M3wxMDA0NDk4fDB8MXxzZWFyY2h8MXx8bW9iaWxlJTIwYXBwJTIwaW50ZXJmYWNlfGVufDF8fHx8MTc4NDc1MjE5N3ww&ixlib=rb-4.1.0&w=800&h=600&fit=crop&q=80" alt="Aether Wallet" onerror="this.onerror=null;this.src='https://picsum.photos/seed/aether/600/600'">
+            </div>
+            <div class="work-content">
+              <div class="work-tags">
+                <span class="tag">FinTech</span>
+                <span class="tag">iOS & Android</span>
+              </div>
+              <h3>Aether Pay — Crossborder Wallet</h3>
+              <p>Designed a global payment application handling $40M+ monthly transaction volume.</p>
+              <div class="work-meta">
+                <span>View Full Case Study</span>
+                <span>➔</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="work-card">
+            <div class="work-image-wrapper">
+              <img src="https://images.unsplash.com/photo-1489875347897-49f64b51c1f8?ixid=M3wxMDA0NDk4fDB8MXxzZWFyY2h8MXx8Y29kZSUyMGRldmVsb3BlciUyMGRhcmt8ZW58MXx8fHwxNzg0NzUyMTk3fDA&ixlib=rb-4.1.0&w=800&h=600&fit=crop&q=80" alt="Vapor Cloud" onerror="this.onerror=null;this.src='https://picsum.photos/seed/vapor/600/600'">
+            </div>
+            <div class="work-content">
+              <div class="work-tags">
+                <span class="tag">DevTools</span>
+                <span class="tag">Infrastructure</span>
+              </div>
+              <h3>Vapor Cloud — Console UX</h3>
+              <p>Streamlined cloud deployment monitoring for 15,000 active software engineers.</p>
+              <div class="work-meta">
+                <span>View Full Case Study</span>
+                <span>➔</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="work-card">
+            <div class="work-image-wrapper">
+              <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixid=M3wxMDA0NDk4fDB8MXxzZWFyY2h8MXx8aGVhbHRoJTIwbWVkaWNhbCUyMHRlY2h8ZW58MXx8fHwxNzg0NzUyMTk5fDA&ixlib=rb-4.1.0&w=800&h=600&fit=crop&q=80" alt="Kura Health" onerror="this.onerror=null;this.src='https://picsum.photos/seed/kura/600/600'">
+            </div>
+            <div class="work-content">
+              <div class="work-tags">
+                <span class="tag">HealthTech</span>
+                <span class="tag">Telemedicine</span>
+              </div>
+              <h3>Kura Health — Patient Portal</h3>
+              <p>HIPAA-compliant Web3 & Web2 unified patient dashboard for remote diagnostics.</p>
+              <div class="work-meta">
+                <span>View Full Case Study</span>
+                <span>➔</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="work-card">
+            <div class="work-image-wrapper">
+              <img src="https://images.unsplash.com/photo-1586868538513-51335a0c5337?ixid=M3wxMDA0NDk4fDB8MXxzZWFyY2h8MXx8ZGVzaWduJTIwc3lzdGVtJTIwY29tcG9uZW50c3xlbnwxfHx8fDE3ODQ3NTIyMDB8MA&ixlib=rb-4.1.0&w=800&h=600&fit=crop&q=80" alt="Lumen System" onerror="this.onerror=null;this.src='https://picsum.photos/seed/lumen/600/600'">
+            </div>
+            <div class="work-content">
+              <div class="work-tags">
+                <span class="tag">Design System</span>
+                <span class="tag">Figma Tokens</span>
+              </div>
+              <h3>Lumen UI — Design System Standard</h3>
+              <p>A multi-theme accessible UI library containing 250+ auto-layout components and tokens.</p>
+              <div class="work-meta">
+                <span>View Full Case Study</span>
+                <span>➔</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="work-card">
+            <div class="work-image-wrapper">
+              <img src="https://images.unsplash.com/photo-1674027392887-751d6396b710?ixid=M3wxMDA0NDk4fDB8MXxzZWFyY2h8MXx8ZWNvbW1lcmNlJTIwZnV0dXJpc3RpYyUyMHRlY2h8ZW58MXx8fHwxNzg0NzUyMjAwfDA&ixlib=rb-4.1.0&w=800&h=600&fit=crop&q=80" alt="Kinetix AI" onerror="this.onerror=null;this.src='https://picsum.photos/seed/kinetix/600/600'">
+            </div>
+            <div class="work-content">
+              <div class="work-tags">
+                <span class="tag">Robotics</span>
+                <span class="tag">Web & Brand</span>
+              </div>
+              <h3>Kinetix AI — Hardware OS Interface</h3>
+              <p>Touchscreen visual control software designed for industrial automation arms.</p>
+              <div class="work-meta">
+                <span>View Full Case Study</span>
+                <span>➔</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA BAND -->
+    <div class="container">
+      <div class="cta-band">
+        <h2>Have a similar vision in mind?</h2>
+        <p>Let's turn your product ideas into production-ready designs that launch on schedule.</p>
+        <a href="#contact" class="btn btn-light">Start a Project ➔</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- PAGE 3: SERVICES & PRICING -->
+  <main data-page="services" class="page-route" hidden>
+    <section>
+      <div class="container">
+        <div class="section-header center">
+          <div class="eyebrow">Engagement Models</div>
+          <h2>Tailored design services for every startup phase</h2>
+          <p>Flexible ways to work together—from focused design sprints to ongoing embedded staff leadership.</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="pricing-card">
+            <h3>Design Sprint MVP</h3>
+            <p style="font-size: 0.9rem; color: var(--ink-muted); margin-top: 0.5rem;">Ideal for early-stage founders needing a pitch-ready interactive prototype.</p>
+            <div class="price-amount">$8,500</div>
+            <div class="price-period">Flat fee / 2-week turnaround</div>
+            <ul class="feature-list">
+              <li>Core UX Wireframing & Flow</li>
+              <li>High-Fidelity Figma Prototype</li>
+              <li>Investor Pitch Deck UI Screenshots</li>
+              <li>Brand Visual Identity Kit</li>
+              <li>2 Revision Cycles</li>
+            </ul>
+            <a href="#contact" class="btn btn-secondary" style="margin-top: auto;">Book MVP Sprint</a>
+          </div>
+
+          <div class="pricing-card featured">
+            <span class="badge-pop">Most Popular</span>
+            <h3>Embedded Product Design</h3>
+            <p style="font-size: 0.9rem; color: var(--ink-muted); margin-top: 0.5rem;">Fractional Staff Designer embedded directly in your engineering team.</p>
+            <div class="price-amount">$14,000</div>
+            <div class="price-period">Per Month / Flexible sprint engagement</div>
+            <ul class="feature-list">
+              <li>Full Web & Mobile App UI/UX</li>
+              <li>Design System Architecture</li>
+              <li>Daily Slack & Figma Collaboration</li>
+              <li>User Testing & Analytics Review</li>
+              <li>Developer Handoff & Handoff QA</li>
+            </ul>
+            <a href="#contact" class="btn btn-primary" style="margin-top: auto;">Start Monthly Retainer</a>
+          </div>
+
+          <div class="pricing-card">
+            <h3>Design System Overhaul</h3>
+            <p style="font-size: 0.9rem; color: var(--ink-muted); margin-top: 0.5rem;">For Series A+ scaleups struggling with UI inconsistencies and dev debt.</p>
+            <div class="price-amount">$12,000</div>
+            <div class="price-period">Flat fee / 3-week project</div>
+            <ul class="feature-list">
+              <li>Complete Component Library Audit</li>
+              <li>Figma Design Tokens setup</li>
+              <li>Accessibility (WCAG AA) Compliance</li>
+              <li>Storybook / Code Hand-off Spec</li>
+              <li>Team Onboarding Workshop</li>
+            </ul>
+            <a href="#contact" class="btn btn-secondary" style="margin-top: auto;">Request Audit</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS PROCESS -->
+    <section style="background: rgba(19, 27, 46, 0.4);">
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow">The Process</div>
+          <h2>Zero friction from kick-off to launch</h2>
+          <p>A structured, predictable execution model built for agile startup velocity.</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="card step-card">
+            <div class="step-number">1</div>
+            <h3>1. Deep Alignment</h3>
+            <p>We kick off with a 2-hour technical discovery session to dissect your product goals, user personas, and technical constraints.</p>
+          </div>
+
+          <div class="card step-card">
+            <div class="step-number">2</div>
+            <h3>2. Iterative Sprints</h3>
+            <p>Bi-weekly Figma deliveries with live interactive Loom updates, enabling real-time feedback with no bloated meetings.</p>
+          </div>
+
+          <div class="card step-card">
+            <div class="step-number">3</div>
+            <h3>3. Dev Handoff & QA</h3>
+            <p>Exporting pixel-perfect components, token variables, and working directly with your front-end devs until deployment.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- PAGE 4: ABOUT -->
+  <main data-page="about" class="page-route" hidden>
+    <section>
+      <div class="container">
+        <div class="grid-2" style="align-items: center; gap: 4rem;">
+          <div>
+            <div class="eyebrow">About Soren Vance</div>
+            <h2 style="font-size: clamp(2.2rem, 5vw, 3.2rem); margin-bottom: 1.5rem;">Crafting digital products that merge beauty with business strategy</h2>
+            <p style="margin-bottom: 1.25rem; font-size: 1.05rem;">I am a Senior Staff Product Designer based in San Francisco with over 10 years of experience designing for fast-growing venture-backed startups and modern tech brands.</p>
+            <p style="margin-bottom: 2rem;">Before going independent, I led design teams at top-tier Silicon Valley product studios, delivering complex Web applications, design tokens, and high-frequency trading platforms. I bridge the gap between design aesthetic, user ergonomics, and developer feasibility.</p>
+            
+            <div class="ctas">
+              <a href="#contact" class="btn btn-primary">Let's Work Together</a>
+              <a href="#work" class="btn btn-outline">Explore Selected Work</a>
+            </div>
+          </div>
+
+          <div>
+            <div style="position: relative;">
+              <img src="https://images.unsplash.com/photo-1772442198907-765685249ea4?ixid=M3wxMDA0NDk4fDB8MXxzZWFyY2h8MXx8cG9ydHJhaXQlMjBkZXNpZ25lciUyMG1hbnxlbnwxfHx8fDE3ODQ3NTIyMDF8MA&ixlib=rb-4.1.0&w=800&h=600&fit=crop&q=80" alt="Soren Vance Working" style="width: 100%; border-radius: var(--radius-lg); border: 1px solid var(--border); box-shadow: var(--shadow);" onerror="this.onerror=null;this.src='https://picsum.photos/seed/soren/700/800'">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CORE PRINCIPLES -->
+    <section style="background: rgba(19, 27, 46, 0.4);">
+      <div class="container">
+        <div class="section-header center">
+          <div class="eyebrow">Operating Principles</div>
+          <h2>Design standards I live by</h2>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <div class="icon-badge">🎯</div>
+            <h3>Clarity Over Clutter</h3>
+            <p>Every element on screen must earn its right to exist by solving a concrete user problem or driving a key product metric.</p>
+          </div>
+
+          <div class="card">
+            <div class="icon-badge">⚡</div>
+            <h3>Dev-Native Handoff</h3>
+            <p>I design with CSS grid, Flexbox, and state transitions in mind, ensuring 100% fidelity when code goes live.</p>
+          </div>
+
+          <div class="card">
+            <div class="icon-badge">💎</div>
+            <h3>Uncompromising Craft</h3>
+            <p>Micro-interactions, fluid animations, and crisp typography convert casual site visitors into passionate brand advocates.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- PAGE 5: CONTACT -->
+  <main data-page="contact" class="page-route" hidden>
+    <section>
+      <div class="container">
+        <div class="grid-2" style="gap: 4rem;">
+          <div>
+            <div class="eyebrow"><span class="dot"></span> Open for Enquiries</div>
+            <h2 style="font-size: clamp(2.2rem, 5vw, 3.5rem); margin-bottom: 1.25rem;">Let's build something remarkable together</h2>
+            <p style="font-size: 1.1rem; color: var(--ink-muted); margin-bottom: 2rem;">Have an upcoming product launch, redesign, or funding round? Fill out the form or reach out directly via email.</p>
+            
+            <div style="display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 2rem;">
+              <div style="display: flex; align-items: center; gap: 1rem;">
+                <div class="icon-badge" style="margin: 0; width: 42px; height: 42px; font-size: 1.1rem;">✉</div>
+                <div>
+                  <div style="font-size: 0.8rem; color: var(--ink-muted);">Direct Email</div>
+                  <div style="font-weight: 700; color: var(--ink);">hello@sorenvance.design</div>
+                </div>
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 1rem;">
+                <div class="icon-badge" style="margin: 0; width: 42px; height: 42px; font-size: 1.1rem;">📍</div>
+                <div>
+                  <div style="font-size: 0.8rem; color: var(--ink-muted);">Location</div>
+                  <div style="font-weight: 700; color: var(--ink);">San Francisco, CA (PST) / Remote Worldwide</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="auth-card" style="max-width: 100%;">
+              <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem;">Project Enquiry</h3>
+              <form>
+                <div class="form-group">
+                  <label for="c-name">Full Name</label>
+                  <input type="text" id="c-name" class="form-control" placeholder="e.g. Sarah Jenkins" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="c-email">Work Email</label>
+                  <input type="email" id="c-email" class="form-control" placeholder="sarah@yourcompany.com" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="c-budget">Project Budget</label>
+                  <select id="c-budget" class="form-control">
+                    <option>$5,000 – $10,000</option>
+                    <option selected>$10,000 – $25,000</option>
+                    <option>$25,000+</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="c-message">Project Details</label>
+                  <textarea id="c-message" class="form-control" placeholder="Tell me about your product, timeline, and goals..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message ➔</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- PAGE 6: SIGN IN -->
+  <main data-page="signin" class="page-route" hidden>
+    <div class="auth-container">
+      <div class="auth-card">
+        <h1>Welcome Back</h1>
+        <p class="auth-sub">Access your startup client dashboard and sprint updates</p>
+        
+        <form>
+          <div class="form-group">
+            <label for="si-email">Work Email</label>
+            <input type="email" id="si-email" class="form-control" placeholder="name@company.com" required>
+          </div>
+
+          <div class="form-group">
+            <label for="si-pass">Password</label>
+            <input type="password" id="si-pass" class="form-control" placeholder="••••••••" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%;">Sign In to Portal</button>
+        </form>
+
+        <div class="auth-footer">
+          Don't have a portal account? <a href="#signup">Register Project</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- PAGE 7: SIGN UP -->
+  <main data-page="signup" class="page-route" hidden>
+    <div class="auth-container">
+      <div class="auth-card">
+        <h1>Create Client Portal</h1>
+        <p class="auth-sub">Track real-time Figma updates, invoice history, and sprint deliverables</p>
+        
+        <form>
+          <div class="form-group">
+            <label for="su-name">Full Name</label>
+            <input type="text" id="su-name" class="form-control" placeholder="Alex Morgan" required>
+          </div>
+
+          <div class="form-group">
+            <label for="su-email">Work Email</label>
+            <input type="email" id="su-email" class="form-control" placeholder="alex@company.com" required>
+          </div>
+
+          <div class="form-group">
+            <label for="su-pass">Create Password</label>
+            <input type="password" id="su-pass" class="form-control" placeholder="••••••••" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
+        </form>
+
+        <div class="auth-footer">
+          Already have an account? <a href="#signin">Sign In</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="foot-grid">
+        <div class="foot-col foot-col-brand">
+          <a href="#home" class="brand-logo">
+            <span class="spark">✦</span>
+            <span>Soren Vance</span>
+          </a>
+          <p>Staff Product Designer helping tech startups design, prototype, and launch market-defining digital products.</p>
+        </div>
+
+        <div class="foot-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#work">Case Studies</a></li>
+            <li><a href="#services">Services & Pricing</a></li>
+            <li><a href="#about">About Soren</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="foot-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#services">Zero-to-One Design</a></li>
+            <li><a href="#services">Figma Design Systems</a></li>
+            <li><a href="#services">SaaS UX Audit</a></li>
+            <li><a href="#services">Mobile App Prototyping</a></li>
+          </ul>
+        </div>
+
+        <div class="foot-col">
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter / X ↗</a></li>
+            <li><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li>
+            <li><a href="https://dribbble.com" target="_blank" rel="noopener noreferrer">Dribbble ↗</a></li>
+            <li><a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="foot-bottom">
+        <div>© 2025 Soren Vance. All rights reserved.</div>
+        <div>Built for high-growth tech teams.</div>
+      </div>
+    </div>
+  </footer>
+
+<script id="__mintsite_link_interceptor__">(function(){if(window.__mintsiteLinkInterceptor)return;window.__mintsiteLinkInterceptor=true;function showPage(name){  var pages=document.querySelectorAll('[data-page]');  if(pages.length<2)return false;  var found=false;  for(var i=0;i<pages.length;i++){    var n=(pages[i].getAttribute('data-page')||'').toLowerCase();    if(n===name){pages[i].hidden=false;pages[i].style.display='';found=true}    else pages[i].hidden=true;  }  if(found)window.scrollTo({top:0,behavior:'smooth'});  return found;}document.addEventListener('click',function(e){  var a=e.target.closest&&e.target.closest('a');  if(!a)return;  var href=(a.getAttribute('href')||'').trim();  if(href.charAt(0)==='#'&&href.length>1){    e.preventDefault();    var id=href.slice(1).toLowerCase();    if(showPage(id))return;    var el=document.getElementById(id);    if(el){el.scrollIntoView({behavior:'smooth',block:'start'})}  } else if(href&&href!=='#'&&href.indexOf('javascript:')!==0){    e.preventDefault();    try{window.open(href,'_blank','noopener,noreferrer')}catch(_){}  }},true);})();</script>
+</body>
+</html>
